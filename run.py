@@ -1,6 +1,10 @@
 import logging
 import os
 import asyncio
+import discord
+import util.config.config as config
+
+cfg = config.Config("./config.yml")
 
 def setup_logging():
     """
@@ -29,13 +33,16 @@ def setup_logging():
     logging.getLogger('').addHandler(file_handler)
 
 
-def run_bot():
+async def run_bot():
     """
     Run the bot.
     """
 
-    from client import client
-    client.run()
+    from client import Client
+    intents = discord.Intents.default()
+    intents.messages = True
+    new_client = Client(intents=intents, application_id=cfg.appid)
+    await new_client.start()
 
 if __name__ == '__main__':
     setup_logging()

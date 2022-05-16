@@ -7,3 +7,4 @@ class Config:
     
         self.token = self.config['token']
         self.prefix = self.config['prefix']
+        self.appid = self.config['appid']
